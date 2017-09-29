@@ -1,6 +1,8 @@
+import numpy as np
+from resize import interpolation as interp
 class interpolation:
 
-    def linear_interpolation(self, pt1, pt2, unknown):
+    def linear_interpolation(self, pt1, pt2, v):
         """Computes the linear interpolation for the unknown values using pt1 and pt2
         take as input
         pt1: known point pt1 and f(pt1) or intensity value
@@ -10,9 +12,9 @@ class interpolation:
 
         #Write your code for linear interpolation here
 
-        return 0
+        return (pt1 * (1 - v)) + (pt2 * v)
 
-    def bilinear_interpolation(self, pt1, pt2, pt3, pt4, unknown):
+    def bilinear_interpolation(self, pt1, pt2, pt3, pt4, xv,yv):
         """Computes the linear interpolation for the unknown values using pt1 and pt2
         take as input
         pt1: known point pt1 and f(pt1) or intensity value
@@ -25,4 +27,4 @@ class interpolation:
         # Write your code for bilinear interpolation here
         # May be you can reuse or call linear interpolatio method to compute this task
 
-        return 0
+        return interpolation.linear_interpolation(self,interpolation.linear_interpolation(self,pt1, pt2, xv), interpolation.linear_interpolation(self,pt3, pt4, xv),yv)
