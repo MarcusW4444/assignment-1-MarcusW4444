@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="babc572d-a94f-48a3-8e09-51e214c04184" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/region_analysis/binary_image.py" afterPath="$PROJECT_DIR$/region_analysis/binary_image.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/region_analysis/cell_counting.py" afterPath="$PROJECT_DIR$/region_analysis/cell_counting.py" />
-    </list>
+    <list default="true" id="babc572d-a94f-48a3-8e09-51e214c04184" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
