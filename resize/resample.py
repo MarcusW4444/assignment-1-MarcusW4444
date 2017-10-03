@@ -116,8 +116,10 @@ class resample:
         # maxv = 0;
         for i in range(sx):
             for j in range(sy):
-                ux = ((i/sx)*originalx)+.5 #.5 for center of pixel, not corner
-                uy = ((j / sy) * originaly)+.5
+                ux = ((i / sx)*originalx)
+                uy = ((j / sy) * originaly)
+
+                #print(image[int(ux),int(uy)])
                 i1 = image[int(ux),int(uy)]
 
                 i2 = image[self.minval(int(ux)+1,originalx-1), int(uy)]

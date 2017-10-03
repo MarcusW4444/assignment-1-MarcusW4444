@@ -7,7 +7,7 @@ class cell_counting:
         takes a input:
         image: binary image
         return: a list of regions"""
-        print("Commencing Blob coloring")
+        #print("Commencing Blob coloring")
         regions = dict()
         mx = image.shape[0]
         my = image.shape[1]
@@ -86,17 +86,21 @@ class cell_counting:
             centery = 0
             d = {}
             d["Pixels"] = {}
+
+
             for j in regions[i]:
                 d["Pixels"][len(d["Pixels"])] = (regions[i][j][0], regions[i][j][1])
                 c = c + 1
                 centerx = centerx + regions[i][j][0]
                 centery = centery + regions[i][j][1]
 
-
-            d["Area"] = c
             d["CenterPoint"] = (0, 0)
+            d["Area"] = c
+
+
             if (c > 0):
                 d["CenterPoint"] = (centerx/c, centery/c)
+            d["Region#"] = int(i)
             stats[i] = d
 
 
@@ -121,9 +125,17 @@ class cell_counting:
         global Y
         X = 0
         Y = 0
-        for i in range(mx):
-            for j in range(my):
-                markedimage[i,j] = image[i,j]
+        #for i in range(mx):
+        #    for j in range(my):
+        #        markedimage[i,j] = image[i,j]
+        for r in stats:
+            if (stats[r]["Area"] >= 15):
+                for p in stats[r]["Pixels"]:
+                    markedimage[stats[r]["Pixels"][p][0],stats[r]["Pixels"][p][1]] = 255
+            else:
+                stats[r] = None
+
+
         def draw(a,b):
             if ((a < 0) or (a >= mx)) or ((b < 0) or (b >= my)):
                 return -1 #out of bounds
@@ -279,8 +291,9 @@ class cell_counting:
                 digitsrequired = (digitsrequired + int(math.log10(int(rval))))
             else:
                 digitsrequired = (digitsrequired + 1)
+
             X = (x - 6)
-            Y = (y + 2+(2 * (digitsrequired - 1)))
+            Y = (y + 2+(2 * (digitsrequired)))
 
             # Determine more optimal positioning of the text for readability
             while True:
@@ -303,13 +316,17 @@ class cell_counting:
                     break
             return 0
         v = 0
+        print("Region Report")
         for r in stats:
-            u = int(stats[r]["CenterPoint"][0])
-            v = int(stats[r]["CenterPoint"][1])
-            # for e in stats[r]["Pixels"]:
-                # markedimage[stats[r]["Pixels"][e][0],stats[r]["Pixels"][e][1]] = 100+r
-            markCross(u,v)
-            drawMultiDigitNumber(stats[r]["Area"], u, v, r)
+            if (stats[r] != None):
+                u = int(stats[r]["CenterPoint"][0])
+                v = int(stats[r]["CenterPoint"][1])
+                # for e in stats[r]["Pixels"]:
+                    # markedimage[stats[r]["Pixels"][e][0],stats[r]["Pixels"][e][1]] = 100+r
+                markCross(u,v)
+                drawMultiDigitNumber(stats[r]["Area"], u, v, r)
+                stats[r]["Pixels"] = None
+                print(stats[r])
         """
         for i in range(mx):
             for j in range(my):
@@ -318,6 +335,7 @@ class cell_counting:
                     v = 1
                 else:
                     v = 0"""
-                    
+
+
         return markedimage
 
